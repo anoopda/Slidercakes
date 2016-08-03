@@ -1,0 +1,263 @@
+<html>
+	<head>
+		
+
+		<style type="text/css">
+		body{
+			overflow: auto;
+			z-index:-1;
+		}
+
+
+		
+		.button{
+
+			height:10px;
+			width:10px;
+
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#pre{
+			position:absolute;
+			
+			top:120px;
+		}
+		#next{
+			position:absolute;
+			right:0px;
+			top:120px;
+		}
+				
+			#slider {
+				position:relative;
+
+
+				width: 640px;
+				height: 420px;
+				margin: 50px auto;
+			}
+			
+
+			#slider ul {
+				display: block;
+				width: 640px;
+				height: 420px;
+				overflow: hidden;
+				position: relative;
+			}
+
+			#slider ul li {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				z-index: 2;
+				list-style: none;
+				overflow: hidden;
+			}
+
+			/*#slider ul li  img {
+				width: 100%;
+				min-height: 100%;
+			}*/
+
+			#slider ul .active {
+				z-index: 5;
+			}
+
+			#slider ul .next-active {
+				z-index: 3;
+			}
+
+
+			.bubble {		animation: hov  ease ;
+					    
+    					transform: scale(1);   
+			}
+
+			.ltr-enter {
+				animation: ltr-enter 1s ease;
+			}
+
+			.ltr-exit {
+				animation: ltr-exit 1s ease;
+			}
+
+			.rtl-enter {
+				animation: rtl-enter 1s ease;
+			}
+
+			.rtl-exit {
+				animation: rtl-exit 1s ease;
+			}
+
+			@keyframes rtl-enter {
+				0% {
+					transform: translate(100%, 0)
+				}
+				100%{
+					transform: translate(0, 0)
+				}
+			}
+
+			@keyframes rtl-exit {
+				0%{
+					transform: translate(0, 0)
+				}
+				100% {
+					transform: translate(-100%, 0)
+				}
+			}
+
+			@keyframes ltr-enter {
+				0%{
+					transform: translate(-100%, 0)
+				}
+				100% {
+					transform: translate(0, 0)
+				}
+			}
+
+			@keyframes ltr-exit {
+				0%{
+					transform: translate(0, 0)
+				}
+				100% {
+					transform: translate(100%, 0)
+				}
+			}
+			@keyframes hov{
+				 transform : scale(1);
+			}
+
+
+
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	</head>
+	<body  background ="https://image-gr.s3.envato.com/files/48316899/cat%20silhouettes%20seamless%20background%20_pv.jpg">
+
+
+		<script src="/home/anoop/Desktop/slider/cakesimageslist.js"></script>
+		
+		<div id="slider">
+			<ul class="items">
+				<li class="active"><img src="http://media1.s-nbcnews.com/j/streams/2014/March/140314/2D274905370387-2D274905371918-fortune-cookie.today-inline-large.jpg"></li>
+				<!-- <li><img src="http://cdn.petpencils.co/2016/07/08/medium_beautiful-cat-with-blue-eyes-for-1920x1080.jpg"></li>
+				<li><img src="http://cdn.petpencils.co/2016/07/07/medium_cats-funny-wallpapers-beautiful-cats-wallpapers-cat-hunts-to-fish.jpg"></li>
+			</ul> -->
+		</div>
+
+
+		<img id="next" onclick="call()" src="http://www.pages.drexel.edu/~dw496/images/Button-Next-gold.png">
+		<img id="pre" onclick ="previmg()"  src="http://yunus.hacettepe.edu.tr/~osert/Hotpot_2014_01/01_tuna_kaya/photos/Button-Previous-gold.png">
+
+		<form>
+  			<input type="radio"> 
+ 		 	<input type="radio"> 
+ 		 	<input type="radio">   
+		</form> 
+
+
+
+		<script type="text/javascript">
+			var $slider = $('#slider'),
+				$ul = $slider.find('ul');
+
+			var call = function() {
+				var $active = $ul.find('.active'),
+					$next = $active.next('li').length ? $active.next('li') : $ul.find('li:first-child');
+					console.log($next);
+					$active.addClass('hov');
+
+				$active.addClass('ltr-exit');
+				$next.addClass('next-active')
+					.addClass('ltr-enter');
+
+				setTimeout(function() {
+					$active.removeClass('ltr-exit')
+						.removeClass('active');
+
+					$next.removeClass('ltr-enter')
+						.removeClass('next-active')
+						.addClass('active');
+				}, 1010);
+			}
+
+
+
+
+
+
+			var previmg = function() {
+				var $active = $ul.find('.active'),
+					$next = $active.prev('li').length ? $active.prev('li') : $ul.find('li:last-child');
+					console.log($next);
+
+				$active.addClass('rtl-exit');
+				$next.addClass('next-active')
+					.addClass('rtl-enter');
+
+				setTimeout(function() {
+					$active.removeClass('rtl-exit')
+						.removeClass('active');
+
+					$next.removeClass('rtl-enter')
+						.removeClass('next-active')
+						.addClass('active');
+				}, 1010);
+			}
+
+					// 	var json = {
+					//     		"photolist": [{
+											        
+					// 						            "images": "http://www.calgaryherald.com/news/cms/binary/6283266.jpg?size=640x420"
+					// 						    }, {
+											        
+					// 						            "images": "http://cdn.bramuenhome.com/2016/04/17/medium_wedding-cake-toppers-via-flickr-zelfmaakidee-pinterest.jpg"
+					// 						    }, {
+											        
+					// 						            "images": "http://media.jrn.com/images/435931_6955219_ver1.0_640_480.jpg"
+					// 						    }, {
+											        
+					// 						            "images": "http://cdn.petpencils.co/2016/07/10/medium_puppy-cake-a-blog-tutorial-my-cake-school.jpg"
+					// 						    },
+					// 						    {
+					// 						    		"images" :"https://thekayword.files.wordpress.com/2014/05/mug-cakes.jpg"
+					// 						    },
+
+					// 						    {
+
+					// 						    		"images" :"http://www.thesisterscafe.com/wp-content/uploads/2013/05/Watermelon-Cake-3.jpg"		
+
+					// 						    }
+
+
+
+
+					// 						    ]
+					// 						};
+					var output = ""; // initialize it outside the loop
+					$.each(json.photolist,function()
+					{
+  					 output += '<li><img src= "'+this.images+'"></li>';
+					});
+					$('.items').append(output);
+
+
+
+
+
+			
+
+			// call();
+			// setInterval(call, 3000);
+		</script>
+	</body>
+</html>
